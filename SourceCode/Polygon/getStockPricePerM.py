@@ -8,14 +8,13 @@ import datetime
 def main():
 
     #company = ["AAPL", "MSFT", "AMZN", "GOOG", "FB", "TSLA", "BRK.A", "V", "WMT", "JNJ"]
-    company = input("Enter Stock Ticker Symbol: $")
-    getStockPrice(company)
     #for ticker in company:
     #    getStockPrice(ticker)
+    company = input("Enter Stock Ticker Symbol: $")
+    getStockPrice(company)
 
 def getStockPrice(ticker:str):
     API_KEY = os.getenv("POLYGON_API_KEY")
-    dataSet = []
 
     url = "https://api.polygon.io/v2/aggs/ticker/"+ ticker.upper() + "/range/5/minute/2013-02-16/2013-08-16?unadjusted=true&sort=asc&limit=50000&apiKey=" + API_KEY
 
@@ -76,11 +75,13 @@ def db(data:str, ticker:str):
         timestamp = datetime.datetime.fromtimestamp((int(data['t'])/1000))
         tickerDate = timestamp.strftime("%x")
         tickerTime = timestamp.strftime("%X")
+
         # Create INSERT query
         sql = '''INSERT INTO josiel_project.''' + ticker.lower() + '''(tickerdate,tickertime,open,high,low,close,volume) VALUES( ''' + "'" + tickerDate + "','" + tickerTime + "'," + str(data['o']) + "," + str(data['h']) + "," + str(data['l']) + "," + str(data['c']) + "," + str(data['v']) + ''');'''
         print(tickerDate + " " + tickerTime)
         cur.execute(sql)
         conn.commit()
+        
     conn.close()
 
 if __name__ == '__main__':
