@@ -17,7 +17,7 @@ def getStockPrice(ticker:str):
     API_KEY = os.getenv("POLYGON_API_KEY")
     dataSet = []
 
-    url = "https://api.polygon.io/v2/aggs/ticker/"+ ticker.upper() + "/range/5/minute/2012-02-07/2021-01-31?unadjusted=true&sort=asc&limit=50000&apiKey=" + API_KEY
+    url = "https://api.polygon.io/v2/aggs/ticker/"+ ticker.upper() + "/range/5/minute/2013-02-16/2013-08-16?unadjusted=true&sort=asc&limit=50000&apiKey=" + API_KEY
 
     # headers for Polygon API request
     payload = {}
@@ -78,6 +78,7 @@ def db(data:str, ticker:str):
         tickerTime = timestamp.strftime("%X")
         # Create INSERT query
         sql = '''INSERT INTO josiel_project.''' + ticker.lower() + '''(tickerdate,tickertime,open,high,low,close,volume) VALUES( ''' + "'" + tickerDate + "','" + tickerTime + "'," + str(data['o']) + "," + str(data['h']) + "," + str(data['l']) + "," + str(data['c']) + "," + str(data['v']) + ''');'''
+        print(tickerDate + " " + tickerTime)
         cur.execute(sql)
         conn.commit()
     conn.close()
