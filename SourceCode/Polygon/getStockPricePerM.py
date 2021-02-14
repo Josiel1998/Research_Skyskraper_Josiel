@@ -38,14 +38,14 @@ def db(data:str, ticker:str):
     print("Connected to " + conn.dsn)
     cur = conn.cursor()
 
+    # Create SQL code to see if table for ticker exist
     exists = '''SELECT EXISTS (SELECT FROM information_schema.tables WHERE  table_schema = 'josiel_project' AND table_name = ''' +  "'" + ticker.lower() + '''');'''
-
     cur.execute(exists)
-
     row = cur.fetchone()
 
+    # Check if table exist
     if (not row[0]):
-        print("Table does not exists.")
+        print("Table does not exist.")
         
         # Create table
         createSQL ='''
@@ -69,8 +69,10 @@ def db(data:str, ticker:str):
     else:
         print("Table does exist.")
 
+    # Convert JSON text into JSON object
     res = json.loads(data)
 
+    # Loop through all items within JSON object and insert into database.schema.table
     for data in res['results']:
         timestamp = datetime.datetime.fromtimestamp((int(data['t'])/1000))
         tickerDate = timestamp.strftime("%x")
@@ -81,7 +83,7 @@ def db(data:str, ticker:str):
         print(tickerDate + " " + tickerTime)
         cur.execute(sql)
         conn.commit()
-        
+
     conn.close()
 
 if __name__ == '__main__':
