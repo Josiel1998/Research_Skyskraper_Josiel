@@ -24,16 +24,6 @@ Earning conference call data has been targeted for this research due to the expo
 - $JNJ
 
 ### Twitter Resources
-#### Company Stock Social Media
-- @Apple
-- @Microsoft
-- @amazon
-- @Google
-- @Facebook
-- @Tesla
-- @Visa
-- @Walmart
-- @JNJNews
 #### Reputable Media Comanies
 - @nytimesbusiness
 - @washingtonpost
