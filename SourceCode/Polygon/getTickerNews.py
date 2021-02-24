@@ -6,8 +6,9 @@ import datetime
 import itertools
  
 def main():
-    company = ["TSLA", "AAPL", "MSFT", "AMZN", "GOOG", "FB", "BRK.A", "V", "WMT", "JNJ"]
+    company = ["JNJ"]
     for ticker in company:
+        print("Start " + ticker)
         getTickerNews(ticker)
  
 def getTickerNews(ticker:str):
@@ -23,10 +24,15 @@ def getTickerNews(ticker:str):
     try:
         for i in itertools.count(start=1):
             # Build API URL and iterate numbers starting from 1
-            url = '''https://api.polygon.io/v1/meta/symbols/''' + ticker + '''/news?perpage=50&page=''' + str(i) + '''1&apiKey=''' + API_KEY
+            url = '''https://api.polygon.io/v1/meta/symbols/''' + ticker + '''/news?perpage=50&page=''' + str(i) + '''&apiKey=''' + API_KEY
             response = requests.request("GET", url, headers = headers, data = payload)
-            if(response.status_code == 200):
-                db(response, i)
+            if(response.status_code == 200):    #check if response is OK
+                res = json.loads(response.text)
+                if(len(res) != 0):      #check if response is OK and has results
+                    db(response, i)
+                else:
+                    print("No results")
+                    break
     except Exception as e: print(e)
     except:
         print(response.status_code)
