@@ -6,7 +6,7 @@ import datetime
 import itertools
  
 def main():
-    company = ["JNJ"]
+    company = ["TSLA", "AAPL", "MSFT", "AMZN", "GOOG", "FB", "BRK.A", "V", "WMT", "JNJ"]
     for ticker in company:
         print("Start " + ticker)
         getTickerNews(ticker)
