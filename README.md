@@ -37,7 +37,7 @@ Earning conference call data has been targeted for this research due to the expo
 #### Twitter Users
 - **@awealthofcs**, Author and Podcaster (Ben Carlson)
 - **@barronsonline**, Investing Publication
-- **@Benzinga**, Provider of finanical information and business news
+- **@Benzinga**, Provider of financial information and business news
 - **@bnkinvest**, Contributor to finanical markets articles
 - **@charliebilello**, Founder and CEO of Compound Capital advisors
 - **@eWhispers**, Key trading tweets around earnings releases
@@ -47,8 +47,8 @@ Earning conference call data has been targeted for this research due to the expo
 - **@jimcramer**, Founder of The Street
 - **@jon_prosser**, Tech Analyst
 - **@jonnajarian**, Co-Founder of marketrebellion.com 
-- **@MarketWatch**, Provider of finanical information and business news
-- **@michaelbatnick**, Director of Research at Ritholz Wealth Managment
+- **@MarketWatch**, Provider of financial information and business news
+- **@michaelbatnick**, Director of Research at Ritholz Wealth Management
 - **@neilcybart**, Founder/Author at Above Avalon
 - **@NorthmanTrader**, Founder at NorthmanTrader.com
 - **@RaoulGMI**, Founder/CEO Global Macro Investor
