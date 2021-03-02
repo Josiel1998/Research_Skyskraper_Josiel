@@ -24,7 +24,7 @@ Earning conference call data has been targeted for this research due to the expo
 - $JNJ
 
 ### Twitter Resources
-#### Reputable Media Comanies
+#### Reputable Media Companies
 - @nytimesbusiness
 - @washingtonpost
 - @YahooFinance
