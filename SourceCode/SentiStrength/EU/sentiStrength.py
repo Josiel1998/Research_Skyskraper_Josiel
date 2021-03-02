@@ -1,9 +1,16 @@
 import subprocess
 import shlex
 import os
+import psycopg2
+import json
+import pandas as pd
+
 
 def main():
-    print(RateSentiment("School is difficult but it will be rewarding"))
+    company = ["TSLA", "AAPL", "MSFT", "AMZN", "GOOG", "FB", "BRK.A", "V", "WMT", "JNJ"]
+    for ticker in company:
+        print("Start " + ticker)
+        db(ticker)
 
 def RateSentiment(sentiString):
 
@@ -50,6 +57,23 @@ def RateSentiment(sentiString):
     res = "Sentiment result is " + sentiment + " " + str(overall)
     return res
 
+
+def db(ticker:str):
+    # Make database connection
+    DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
+    
+    try:
+        conn = psycopg2.connect(database=DATABASE_CRED["database"], user = DATABASE_CRED["user"], password = DATABASE_CRED["password"], host = DATABASE_CRED["host"], port = DATABASE_CRED["port"])
+        print("Connected to " + conn.dsn)
+        cur = conn.cursor()
+
+        sql =  "SELECT * FROM tweets_by_handle.awealthofcs"
+        df = pd.read_sql(sql, conn)
+        print(df)
+
+        for row in df.iterrows():
+            print(str(row[0]) + ": " + str(row[1].tweet_text))
+    except Exception as e: print(e)
 
 if __name__ == '__main__':
     main()
