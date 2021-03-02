@@ -7,21 +7,15 @@ import pandas as pd
 
 
 def main():
-    company = ["TSLA", "AAPL", "MSFT", "AMZN", "GOOG", "FB", "BRK.A", "V", "WMT", "JNJ"]
-    for ticker in company:
-        print("Start " + ticker)
-        db(ticker)
+    db()
 
 def RateSentiment(sentiString):
-
-    print(sentiString)
 
     # Get relative path
     dirname = os.path.dirname(__file__)
 
     getJar = "java -jar " + dirname + "/SentiStrengthCom.jar"
     getData = "stdin sentidata " + dirname + "/SentStrength_Data_Sept2011/"
-    #option = "trinary (report positive-negative-neutral classification instead)"
     option = "scale"
     #open a subprocess using shlex to get the command line string into the correct args list format
     p = subprocess.Popen(shlex.split(getJar + " " + getData + " " + option),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -54,11 +48,11 @@ def RateSentiment(sentiString):
     else:
         sentiment = "Strong Positive"
 
-    res = "Sentiment result is " + sentiment + " " + str(overall)
-    return res
+    print("Sentiment result is " + sentiment + " " + str(overall))
+    return str(overall)
 
 
-def db(ticker:str):
+def db():
     # Make database connection
     DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
     
@@ -67,12 +61,18 @@ def db(ticker:str):
         print("Connected to " + conn.dsn)
         cur = conn.cursor()
 
-        sql =  "SELECT * FROM tweets_by_handle.awealthofcs"
-        df = pd.read_sql(sql, conn)
-        print(df)
+        # list all tables with tweets
+        tweets_by_handle = ["nytimesbusiness", "washingtonpost", "yahoofinance", "reutersbiz", "bbcbusiness", "wsjmarkets", "nypostbiz", "sfchronicle", "markets" "awealthofcs", "barronsonline", "benzinga", "bnkinvest", "charliebilello", "ewhisper", "grassosteve", "hmeisler", "igsquawk", "jimcramer", "jon_prosser", "jonnajarian", "marketwatch", "michaelbatnick", "neilcybart", "northmantrader", "raoulgmi", "reformedbroker", "thestreet", "tmfjmo", "tomwarren", "zacksresearch"]
 
-        for row in df.iterrows():
-            print(str(row[0]) + ": " + str(row[1].tweet_text))
+        # loop through tables on database and get sentiment of tweet
+        for tbl in tweets_by_handle:
+            sql =  "SELECT * FROM tweets_by_handle." + tbl
+            df = pd.read_sql(sql, conn)
+
+            for row in df.iterrows():
+                print(str(row[0]) + ": " + str(row[1].tweet_text))
+                RateSentiment(row[1].tweet_text)
+
     except Exception as e: print(e)
 
 if __name__ == '__main__':
