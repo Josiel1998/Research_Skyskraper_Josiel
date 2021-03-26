@@ -33,7 +33,7 @@ def RateSentiment(sentiString):
     overall = int(classification[2])
 
     # Switch/Casing classification definition
-    if(-4 >= overall):
+    if(-4 == overall):
         sentiment = "Strong Negative"
     elif(-3 == overall):
         sentiment = "Negative"
