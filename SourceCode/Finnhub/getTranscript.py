@@ -14,7 +14,7 @@ def getTranscriptList(ticker:str):
     print("Getting transcript list: " + ticker)
     API_KEY = os.getenv("FINNHUB_API_KEY")
 
-    # headers for Polygon API request
+    # headers for Finnhub API request
     payload = {}
     headers = {}
  
@@ -102,7 +102,7 @@ def getTranscriptDetails(ticker:str):
     row = cur.fetchall()
         
     API_KEY = os.getenv("FINNHUB_API_KEY")
-    # headers for Polygon API request        
+    # headers for Finnhub API request        
     payload = {}
     headers = {}
 
