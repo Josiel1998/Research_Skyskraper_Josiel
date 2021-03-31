@@ -10,7 +10,7 @@ col = ["tweet_id", "tweet_date", "tweet_time", "tweet_text", "likes", "retweets"
 df = pd.DataFrame()
 
 def main():
-    accounts = ["amazon", "barronsonline", "bbcbusiness", "benzinga", "bnkinvest", "igsquawk", "markets", "marketwatch", "nypostbiz", "nytimesbusiness", "reutersbiz", "reuterbiz", "sfchronicle", "theeconomist", "thestreet", "washingtonpost", "wsjmarkets", "yahoofinance", "zachsresearch","awealthofcs", "carlquintanilla", "charliebilello", "ewhispers", "grassosteve", "jimcramer", "jon_prosser", "jonajarian", "lizannsonders", "neilcybart", "northmantrader", "raoulgmi", "reformedbroker", "thestalwart", "tmfjmo", "tomwarren"]
+    accounts = ["amazon", "barronsonline", "bbcbusiness", "benzinga", "bnkinvest", "igsquawk", "markets", "marketwatch", "nypostbiz", "nytimesbusiness", "reutersbiz", "sfchronicle", "theeconomist", "thestreet", "washingtonpost", "wsjmarkets", "yahoofinance", "zachsresearch","awealthofcs", "carlquintanilla", "charliebilello", "ewhispers", "grassosteve", "jimcramer", "jon_prosser", "jonajarian", "lizannsonders", "neilcybart", "northmantrader", "raoulgmi", "reformedbroker", "thestalwart", "tmfjmo", "tomwarren"]
     for acc in accounts:
         createCSV(acc)
     global df
