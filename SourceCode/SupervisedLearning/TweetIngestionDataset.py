@@ -10,11 +10,11 @@ col = ["tweet_id", "tweet_date", "tweet_time", "tweet_text", "likes", "retweets"
 df = pd.DataFrame()
 
 def main():
-    accounts = ["amazon", "barronsonline", "bbcbusiness", "benzinga", "bnkinvest", "igsquawk", "markets", "marketwatch", "nypostbiz", "nytimesbusiness", "reutersbiz", "sfchronicle", "theeconomist", "thestreet", "washingtonpost", "wsjmarkets", "yahoofinance", "zachsresearch","awealthofcs", "carlquintanilla", "charliebilello", "ewhispers", "grassosteve", "jimcramer", "jon_prosser", "jonajarian", "lizannsonders", "neilcybart", "northmantrader", "raoulgmi", "reformedbroker", "thestalwart", "tmfjmo", "tomwarren"]
+    accounts = ["amazon", "barronsonline", "bbcbusiness", "benzinga", "bnkinvest", "igsquawk", "markets", "marketwatch", "nypostbiz", "nytimesbusiness", "reutersbiz", "sfchronicle", "theeconomist", "thestreet", "washingtonpost", "wsjmarkets", "yahoofinance", "zacksresearch","awealthofcs", "carlquintanilla", "charliebilello", "ewhispers", "grassosteve", "jimcramer", "jon_prosser", "jonnajarian", "lizannsonders", "neilcybart", "northmantrader", "raoulgmi", "reformedbroker", "thestalwart", "tmfjmo", "tomwarren"]
     for acc in accounts:
         createCSV(acc)
     global df
-    df.to_csv ("/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SupervisedLearning/data/", index = False, header=True)
+    df.to_csv ("/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SupervisedLearning/data/TwitterDataset.csv", index = False, header=True)
         
 def createCSV(acc:str):
     # Make database connection
@@ -33,6 +33,7 @@ def createCSV(acc:str):
         row = cur.fetchall()
         for rec in row:
             dictionary = {
+                "tweet_handle": acc,
                 "tweet_id": rec[0], 
                 "tweet_date": rec[1], 
                 "tweet_time": rec[2], 
@@ -45,7 +46,6 @@ def createCSV(acc:str):
                 }
             df = df.append(dictionary,ignore_index=True)
         print(df.shape)
-        print(df.head())
     except Exception as e:
         print(e)
     
