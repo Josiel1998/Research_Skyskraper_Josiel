@@ -13,7 +13,6 @@ def main():
     getTweets(table)
 
 def getScope():
-    global df
     global table
 
     # Connect to database and get all tables within scope of Skyskraper Twitter handles
