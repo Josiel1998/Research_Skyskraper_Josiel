@@ -7,7 +7,9 @@ import pandas as pd
 
 
 def main():
-    db()
+    #db()
+    text = '[{"compound": 0.6369, "neg": 0.0, "neu": 0.606, "pos": 0.394}]'
+    RateSentiment(text)
 
 def RateSentiment(sentiString):
 

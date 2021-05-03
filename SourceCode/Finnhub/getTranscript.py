@@ -2,7 +2,10 @@ import requests, os, itertools, json, datetime, psycopg2
 import pandas as pd
 
 def main():
-    company = ["AAPL", "TSLA", "MSFT", "AMZN", "GOOG", "FB", "BRK.A", "V", "WMT", "JNJ"]
+    # project stocks
+    #company = ["AAPL", "TSLA", "MSFT", "AMZN", "GOOG", "FB", "BRK.A", "V", "WMT", "JNJ"]
+    # DOW 30
+    company = ["AXP", "AMGN", "BA", "CAT", "CSCO", "CVX", "GS", "HD", "HON", "IBM", "INTC", "KO", "JPM", "MCD", "MMM", "MRK", "NKE", "PG", "TRV", "UNH", "CRM", "VZ", "WBA", "DIS", "DOW"]
     for ticker in company:
         print("Starting " + ticker)
         getTranscriptList(ticker)
