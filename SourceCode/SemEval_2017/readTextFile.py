@@ -13,6 +13,7 @@ def main():
     # create an Empty DataFrame object
     df = pd.DataFrame()
     df_gold = pd.DataFrame()
+    count = 0
 
     with open('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SemEval_2017/Raw/Task 4/SemEval2017-task4-dev.subtask-A.english.INPUT.txt') as f1:
         lines1 = [line.rstrip() for line in f1]
@@ -29,21 +30,25 @@ def main():
         print(df.shape)            
         print(df.head())
 
+        df.to_csv('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SemEval_2017/Raw/Task 4/SUBTASK_DATASET.csv')
+
         with open('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SemEval_2017/Raw/Task 4/twitter-2016test-A-English.txt') as f2:
             lines2 = [line2.rstrip() for line2 in f2]
             for line2 in lines2:
                 if(not(line2 == '' or line2 == '"')):
                     res2 = line2.split("\t")
-                    tweet_id_gold.append(res[0])
-                    sentiment_gold.append(res[1])
+                    tweet_id_gold.append(res2[0])
+                    sentiment_gold.append(res2[1])
 
-                    for index, row in df.iterrows():
-                        if(row.values[0] == res[0]):
-                            tweet_gold.append(row.values[2])
+                    #for index, row in df.iterrows():
+                    #    if(row.values[0] == res2[0]):
+                    #        tweet_gold.append(row.values[2])
+                    #        count = count + 1
+                    #        print(str(count) + " " + str(res2[0]) + " " + str(row.values[2]))
 
             df_gold['Tweet ID'] = tweet_id_gold
             df_gold['Sentiment'] = sentiment_gold
-            df_gold['Tweet'] = tweet_gold
+            #df_gold['Tweet'] = tweet_gold
             print(df_gold.shape)            
             print(df_gold.head())
 

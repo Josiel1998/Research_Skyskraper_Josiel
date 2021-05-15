@@ -8,8 +8,25 @@ import pandas as pd
 
 def main():
     #db()
-    text = '[{"compound": 0.6369, "neg": 0.0, "neu": 0.606, "pos": 0.394}]'
-    RateSentiment(text)
+    #text = '@Prinxofdarkness Thanks for contacting us back! üòÄ Please check your e-mail for an update from us! üíå'
+    #RateSentiment(text)
+
+    res = []
+    resN = []
+    count = 0
+
+    data = pd.read_csv("/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/TwitterDataset.csv") 
+    for tweet in data.tweet_text:
+        print(count)
+        print(tweet)
+        result = RateSentimentTri(tweet)
+        resultN = RateSentiment(tweet)
+        resN.append(resultN)
+        res.append(result)
+        count = count + 1
+    data["SentiStrength Sentiment"] = res
+    data["SentiStrength Score"] = resN
+    data.to_csv("TwitterDatasetWithSentiStrength.csv")
 
 def RateSentiment(sentiString):
 
@@ -37,21 +54,76 @@ def RateSentiment(sentiString):
     # Switch/Casing classification definition
     if(-4 == overall):
         sentiment = "Strong Negative"
+        trinary_sentiment = "Negative"
     elif(-3 == overall):
         sentiment = "Negative"
+        trinary_sentiment = "Negative"
     elif(0 > overall):
         sentiment = "Weak Negative"
+        trinary_sentiment = "Negative"
     elif(0 == overall):
         sentiment = "Neutral"
+        trinary_sentiment = "Neutral"
     elif(3 > overall):
         sentiment = "Weak Positive"
+        trinary_sentiment = "Positive"
     elif(3 == overall):
         sentiment = "Positive"
+        trinary_sentiment = "Positive"
     else:
         sentiment = "Strong Positive"
+        trinary_sentiment = "Positive"
 
     print("Sentiment result is " + sentiment + " " + str(overall))
     return str(overall)
+
+def RateSentimentTri(sentiString):
+
+    # Get relative path
+    dirname = os.path.dirname(__file__)
+
+    getJar = "java -jar " + dirname + "/SentiStrengthCom.jar"
+    getData = "stdin sentidata " + dirname + "/SentStrength_Data_Sept2011/"
+    option = "scale"
+    #open a subprocess using shlex to get the command line string into the correct args list format
+    p = subprocess.Popen(shlex.split(getJar + " " + getData + " " + option),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    #communicate via stdin the string to be rated. Note that all spaces are replaced with +
+    #Can't send string in Python 3, must send bytes
+    b = bytes(sentiString.replace(" ","+"), 'utf-8')
+    stdout_byte, stderr_text = p.communicate(b)
+    #convert from byte
+    stdout_text = stdout_byte.decode("utf-8") 
+    #replace the tab with a space between the positive and negative ratings. e.g. 1    -5 -> 1 -5
+    stdout_text = stdout_text.rstrip().replace("\t"," ")
+    classification = stdout_text.split()
+    positive = int(classification[0])
+    negative = int(classification[1])
+    overall = int(classification[2])
+
+    # Switch/Casing classification definition
+    if(-4 == overall):
+        sentiment = "Strong Negative"
+        trinary_sentiment = "Negative"
+    elif(-3 == overall):
+        sentiment = "Negative"
+        trinary_sentiment = "Negative"
+    elif(0 > overall):
+        sentiment = "Weak Negative"
+        trinary_sentiment = "Negative"
+    elif(0 == overall):
+        sentiment = "Neutral"
+        trinary_sentiment = "Neutral"
+    elif(3 > overall):
+        sentiment = "Weak Positive"
+        trinary_sentiment = "Positive"
+    elif(3 == overall):
+        sentiment = "Positive"
+        trinary_sentiment = "Positive"
+    else:
+        sentiment = "Strong Positive"
+        trinary_sentiment = "Positive"
+
+    return trinary_sentiment
 
 
 def db():
