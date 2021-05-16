@@ -15,18 +15,18 @@ def main():
     resN = []
     count = 0
 
-    data = pd.read_csv("/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/TwitterDataset.csv") 
-    for tweet in data.tweet_text:
+    data = pd.read_csv("/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/SemEval_2017_Task4_TestSplit_BERT.csv") 
+    for tweet in data.values:
         print(count)
-        print(tweet)
-        result = RateSentimentTri(tweet)
-        resultN = RateSentiment(tweet)
+        print(tweet[4])
+        result = RateSentimentTri(tweet[4])
+        resultN = RateSentiment(tweet[4])
         resN.append(resultN)
         res.append(result)
         count = count + 1
     data["SentiStrength Sentiment"] = res
     data["SentiStrength Score"] = resN
-    data.to_csv("TwitterDatasetWithSentiStrength.csv")
+    data.to_csv("SemEval_2017_Task4_TestSplit_BERT_Senti.csv")
 
 def RateSentiment(sentiString):
 
@@ -34,7 +34,7 @@ def RateSentiment(sentiString):
     dirname = os.path.dirname(__file__)
 
     getJar = "java -jar " + dirname + "/SentiStrengthCom.jar"
-    getData = "stdin sentidata " + dirname + "/SentStrength_Data_Sept2011/"
+    getData = "stdin sentidata " + dirname + "/SentiStrength_Data/"
     option = "scale"
     #open a subprocess using shlex to get the command line string into the correct args list format
     p = subprocess.Popen(shlex.split(getJar + " " + getData + " " + option),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -83,7 +83,7 @@ def RateSentimentTri(sentiString):
     dirname = os.path.dirname(__file__)
 
     getJar = "java -jar " + dirname + "/SentiStrengthCom.jar"
-    getData = "stdin sentidata " + dirname + "/SentStrength_Data_Sept2011/"
+    getData = "stdin sentidata " + dirname + "/SentiStrength_Data/"
     option = "scale"
     #open a subprocess using shlex to get the command line string into the correct args list format
     p = subprocess.Popen(shlex.split(getJar + " " + getData + " " + option),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)

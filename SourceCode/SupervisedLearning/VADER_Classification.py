@@ -10,7 +10,7 @@ def sentiment_scores():
 
     # Get Data
     #df = pd.read_csv(str(os.path.dirname(__file__)) + "/data/TwitterDataset.csv")
-    df = pd.read_csv('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/TwitterDatasetSentistrengthAndBERT_se2017t4.csv')
+    df = pd.read_csv('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/SemEval_2017_Task4_TestSplit_BERT_Senti.csv')
     print(df.head())
 
     #capture VADER Data
@@ -23,7 +23,7 @@ def sentiment_scores():
 
     for index, row in df.iterrows():
         print(count)
-        sentence = row.tweet_text
+        sentence = row.Tweet
         print(sentence)
         # Create a SentimentIntensityAnalyzer object.
         sid_obj = SentimentIntensityAnalyzer()
@@ -60,7 +60,7 @@ def sentiment_scores():
     df["VADER_Compound"] = VADERcompound
     df["VADER_Classification"] = VADERclassification
     print(df.head())
-    df.to_csv ("/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/TwitterDatasetSentistrengthBERTandVADER_se2017t4.csv", index = False, header=True)
+    df.to_csv ("//Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/SemEval_2017_Task4_TestSplit_BERT_Senti_VADER.csv", index = False, header=True)
 
 
 if __name__ == '__main__':
