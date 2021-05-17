@@ -1,6 +1,7 @@
 from app import app
 
 from flask import render_template
+from flask import request
 
 @app.route("/")
 def index():
@@ -13,3 +14,11 @@ def about():
     <p>This is a lovely little paragraph</p>
     <code>Flask is <em>awesome</em></code>
     """
+
+@app.route("/bert", methods=['GET','POST'])
+def server():
+    if request.method == 'POST':
+        text = request.form['text']
+        return text
+    else:
+        return "THIS IS A GET"
