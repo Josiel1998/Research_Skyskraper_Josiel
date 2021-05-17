@@ -22,3 +22,6 @@ def server():
         return text
     else:
         return "THIS IS A GET"
+
+def model():
+    return ""
