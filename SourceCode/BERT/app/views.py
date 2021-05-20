@@ -20,21 +20,17 @@ device = torch.device("cpu")
 def index():
     return render_template("public/index.html")
 
-@app.route("/about")
-def about():
-    return """
-    <h1 style='color: red;'>I'm a red H1 heading!</h1>
-    <p>This is a lovely little paragraph</p>
-    <code>Flask is <em>awesome</em></code>
-    """
-
-@app.route("/bert", methods=['GET','POST'])
+@app.route("/", methods=['POST'])
 def server():
+  print(request.form['text'])
+  if request.form['text'] != '':
     if request.method == 'POST':
-        text = request.form['text']
-        return model_b(text)
-    else:
-        return "THIS IS A GET"
+      text = request.form['text']
+      bert_model_response = model_b(text)
+      bert_model_response_raw = model_b_raw(text)
+      return render_template("public/index.html", text = text, results = bert_model_response, raw = bert_model_response_raw)
+  else:
+    return render_template("public/index.html")
 
 class SentimentClassifier(nn.Module):
   def __init__(self, n_classes):
@@ -51,24 +47,6 @@ class SentimentClassifier(nn.Module):
     return self.out(output)
 
 model = SentimentClassifier(len(class_names))
-
-def predict(text):
-  encoded_review = tokenizer.encode_plus(
-  text,
-  max_length=MAX_LEN,
-  add_special_tokens=True,
-  return_token_type_ids=False,
-  pad_to_max_length=True,
-  return_attention_mask=True,
-  return_tensors='pt',
-  truncation=True
-  )
-
-  input_ids = encoded_review['input_ids'].to(device)
-  attention_mask = encoded_review['attention_mask'].to(device)
-  output = model(input_ids, attention_mask)
-  _, prediction = torch.max(output, dim=1)
-  return class_names[prediction]
 
 def model_b(text:str):
     model.load_state_dict(torch.load('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/BERT/app/resources/SE2017T4_BERT_base_cased_model.bin', map_location=torch.device("cpu")))
@@ -90,4 +68,28 @@ def predict(tweet):
   attention_mask = encoded_review['attention_mask'].to(device)
   output = model(input_ids, attention_mask)
   _, prediction = torch.max(output, dim=1)
+  print("BERT OUTPUT: " + str(output))
+  print("BERT PREDICTION: " + str(prediction))
   return class_names[prediction]
+
+def model_b_raw(text:str):
+  model.load_state_dict(torch.load('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/BERT/app/resources/SE2017T4_BERT_base_cased_model.bin', map_location=torch.device("cpu")))
+  return predict_raw(text)
+
+def predict_raw(tweet):
+  encoded_review = tokenizer.encode_plus(
+  tweet,
+  max_length=MAX_LEN,
+  add_special_tokens=True,
+  return_token_type_ids=False,
+  pad_to_max_length=True,
+  return_attention_mask=True,
+  return_tensors='pt',
+  truncation=True
+  )
+
+  input_ids = encoded_review['input_ids'].to(device)
+  attention_mask = encoded_review['attention_mask'].to(device)
+  output = model(input_ids, attention_mask)
+  _, prediction = torch.max(output, dim=1)
+  return str(output)
