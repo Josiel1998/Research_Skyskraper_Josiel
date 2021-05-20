@@ -10,7 +10,7 @@ from torch import nn, optim
 from transformers import BertModel, BertTokenizer
 
 # model variables
-class_names = ['negative', 'neutral', 'positive']
+class_names = ['Negative', 'Neutral', 'Positive']
 PRE_TRAINED_MODEL_NAME = 'bert-base-cased'
 tokenizer = BertTokenizer.from_pretrained(PRE_TRAINED_MODEL_NAME)
 MAX_LEN = 80
