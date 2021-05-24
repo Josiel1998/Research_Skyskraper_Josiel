@@ -15,7 +15,7 @@ def main():
     resN = []
     count = 0
 
-    data = pd.read_csv("/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/SemEval_2017_Task4_TestSplit_BERT.csv") 
+    data = pd.read_csv("SourceCode/Datasets/SemEval_2017_Task4_TestSplit_BERT.csv") 
     for tweet in data.values:
         print(count)
         print(tweet[4])

@@ -15,7 +15,7 @@ def main():
     df_gold = pd.DataFrame()
     count = 0
 
-    with open('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SemEval_2017/Raw/Task 4/SemEval2017-task4-dev.subtask-A.english.INPUT.txt') as f1:
+    with open('SourceCode/SemEval_2017/Raw/Task 4/SemEval2017-task4-dev.subtask-A.english.INPUT.txt') as f1:
         lines1 = [line.rstrip() for line in f1]
         for line1 in lines1:
             if(not(line1 == '' or line1 == '"')):
@@ -30,9 +30,9 @@ def main():
         print(df.shape)            
         print(df.head())
 
-        df.to_csv('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SemEval_2017/Raw/Task 4/SUBTASK_DATASET.csv')
+        df.to_csv('SourceCode/SemEval_2017/Raw/Task 4/SUBTASK_DATASET.csv')
 
-        with open('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SemEval_2017/Raw/Task 4/twitter-2016test-A-English.txt') as f2:
+        with open('SourceCode/SemEval_2017/Raw/Task 4/twitter-2016test-A-English.txt') as f2:
             lines2 = [line2.rstrip() for line2 in f2]
             for line2 in lines2:
                 if(not(line2 == '' or line2 == '"')):
@@ -52,7 +52,7 @@ def main():
             print(df_gold.shape)            
             print(df_gold.head())
 
-            df_gold.to_csv('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SemEval_2017/Raw/Task 4/GOLD-DATASET.csv')
+            df_gold.to_csv('SourceCode//GOLD-DATASET.csv')
 
 
 if __name__ == '__main__':

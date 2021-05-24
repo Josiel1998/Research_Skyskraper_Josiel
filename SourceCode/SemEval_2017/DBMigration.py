@@ -1,9 +1,13 @@
 import json, os
 import psycopg2
+from dotenv import dotenv_values
+
+# load secret environment variables
+config = dotenv_values(".env")
 
 def main():
-    hl = "/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SemEval_2017/Raw/Task 5/Headlines_Testdata_withscores.json"
-    micro = "/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/SemEval_2017/Raw/Task 5/Microblogs_Testdata_withscores.json"
+    hl = "SourceCode/SemEval_2017/Raw/Task 5/Headlines_Testdata_withscores.json"
+    micro = "SourceCode/SemEval_2017/Raw/Task 5/Microblogs_Testdata_withscores.json"
     
     # migrate headline data
     fi = open(hl,)
@@ -17,9 +21,7 @@ def main():
 
 def migrateHL(obj:json):
     # Make database connection
-    DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
-    
-    conn = psycopg2.connect(database=DATABASE_CRED["database"], user = DATABASE_CRED["user"], password = DATABASE_CRED["password"], host = DATABASE_CRED["host"], port = DATABASE_CRED["port"])
+    conn = psycopg2.connect(database = config['DBNAME'], user = config['DBUSER'], password = config['DBPASSWORD'], host = config['DBHOST'], port = config['DBPORT'])
     print("Connected to " + conn.dsn)
     cur = conn.cursor()
 
@@ -35,9 +37,7 @@ def migrateHL(obj:json):
 
 def migrateMicro(obj:json):
     # Make database connection
-    DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
-    
-    conn = psycopg2.connect(database=DATABASE_CRED["database"], user = DATABASE_CRED["user"], password = DATABASE_CRED["password"], host = DATABASE_CRED["host"], port = DATABASE_CRED["port"])
+    conn = psycopg2.connect(database = config['DBNAME'], user = config['DBUSER'], password = config['DBPASSWORD'], host = config['DBHOST'], port = config['DBPORT'])
     print("Connected to " + conn.dsn)
     cur = conn.cursor()
 
