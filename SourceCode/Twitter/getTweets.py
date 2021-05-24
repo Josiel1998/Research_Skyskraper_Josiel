@@ -3,6 +3,10 @@ import json
 import os
 import psycopg2
 import pandas as pd
+from dotenv import dotenv_values
+
+# load secret environment variables
+config = dotenv_values(".env")
 
 table = []
 
@@ -16,8 +20,7 @@ def getScope():
     global table
 
     # Connect to database and get all tables within scope of Skyskraper Twitter handles
-    DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
-    conn = psycopg2.connect(database=DATABASE_CRED["database"], user = DATABASE_CRED["user"], password = DATABASE_CRED["password"], host = DATABASE_CRED["host"], port = DATABASE_CRED["port"])
+    conn = psycopg2.connect(database = config['DBNAME'], user = config['DBUSER'], password = config['DBPASSWORD'], host = config['DBHOST'], port = config['DBPORT'])
     print("Connected to " + conn.dsn)
     cur = conn.cursor()
 
@@ -33,8 +36,7 @@ def getScope():
 def getTweets(tables:list):
     for t in tables:
         # Connect to database to get current user account oldest tweet for reference point
-        DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
-        conn = psycopg2.connect(database=DATABASE_CRED["database"], user = DATABASE_CRED["user"], password = DATABASE_CRED["password"], host = DATABASE_CRED["host"], port = DATABASE_CRED["port"])
+        conn = psycopg2.connect(database = config['DBNAME'], user = config['DBUSER'], password = config['DBPASSWORD'], host = config['DBHOST'], port = config['DBPORT'])        
         print("Connected to " + conn.dsn)
         cur = conn.cursor()
 
@@ -47,7 +49,7 @@ def getTweets(tables:list):
         # Create HTTP (API) Request to get tweet for twitter username and starting at oldest tweet
         url = "https://api.twitter.com/2/tweets/search/all?query=from:" + t + "&max_results=100&until_id=" + str(old_tweet_id)
         # BEARER_TOKEN = json.loads(os.getenv("TWITTER_CREDS"))["bearer"]
-        BEARER_TOKEN = os.getenv("TWITTER_RESEARCH_BEARER")
+        BEARER_TOKEN = config['TWITTER_BEARER']
 
         payload={}
         headers = {"Authorization": "Bearer " + BEARER_TOKEN }

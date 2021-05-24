@@ -3,14 +3,17 @@ import json
 import os
 from getpass import getpass
 import psycopg2
+from dotenv import dotenv_values
+
+# load secret environment variables
+config = dotenv_values(".env")
 
 def main():
     getTwitterUsers()
 
 def prodDB(data:object):
     # Make database connection
-    DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
-    conn = psycopg2.connect(database=DATABASE_CRED["database"], user = DATABASE_CRED["user"], password = DATABASE_CRED["password"], host = DATABASE_CRED["host"], port = DATABASE_CRED["port"])
+    conn = psycopg2.connect(database = config['DBNAME'], user = config['DBUSER'], password = config['DBPASSWORD'], host = config['DBHOST'], port = config['DBPORT'])
     print("Connected to " + conn.dsn)
     cur = conn.cursor()
 
@@ -32,7 +35,7 @@ def getTwitterUsers():
 
     last_user = twitter_users[len(twitter_users)-1]
     url = "https://api.twitter.com/2/users/by?usernames="
-    BEARER_TOKEN = json.loads(os.getenv("TWITTER_CREDS"))["bearer"]
+    BEARER_TOKEN = config['TWITTER_BEARER']
 
     # create URL target
     for user in twitter_users:

@@ -9,6 +9,7 @@
     - DBPASSWORD
     - DBHOST
     - DBPORT
+    - TWITTER_BEARER
 
 
 For example
@@ -18,6 +19,7 @@ export DBUSER = "[DATABASE USERNAME"
 export DBPASSWORD = "[DATABASE PASSWORD FOR USERNAME]"
 export DBHOST = "[DATABASE IP ADDRESS]"
 export DBPORT = "[DATABASE PORT NUMBER]"
+export TWITTER_BEARER = "[TWITTER BEARER TOKEN]"
 ```
 
 <sub><sup>Replace text within brackets []</sup></sub>
