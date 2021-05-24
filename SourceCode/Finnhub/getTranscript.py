@@ -1,5 +1,9 @@
 import requests, os, itertools, json, datetime, psycopg2
 import pandas as pd
+from dotenv import dotenv_values
+
+# load secret environment variables
+config = dotenv_values(".env")
 
 def main():
     # project stocks
@@ -16,7 +20,7 @@ def main():
 # get list of transcripts for ticker symbol
 def getTranscriptList(ticker:str):
     print("Getting transcript list: " + ticker)
-    API_KEY = os.getenv("FINNHUB_API_KEY")
+    API_KEY = config['FINNHUB_API']
 
     # headers for Finnhub API request
     payload = {}
@@ -38,9 +42,8 @@ def getTranscriptList(ticker:str):
 # Get details of the transcript call (id)
 def getTranscriptDetails(ticker:str):
     print("Getting transcript detail: " + ticker)
-    DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
     
-    conn = psycopg2.connect(database=DATABASE_CRED["database"], user = DATABASE_CRED["user"], password = DATABASE_CRED["password"], host = DATABASE_CRED["host"], port = DATABASE_CRED["port"])
+    conn = psycopg2.connect(database = config['DBNAME'], user = config['DBUSER'], password = config['DBPASSWORD'], host = config['DBHOST'], port = config['DBPORT'])
     print("Connected to " + conn.dsn)
     cur = conn.cursor()
 
@@ -105,7 +108,7 @@ def getTranscriptDetails(ticker:str):
     cur.execute(sql)
     row = cur.fetchall()
         
-    API_KEY = os.getenv("FINNHUB_API_KEY")
+    API_KEY = config['FINNHUB_API']
     # headers for Finnhub API request        
     payload = {}
     headers = {}
@@ -150,9 +153,8 @@ def getTranscriptDetails(ticker:str):
 def db(ticker:str, response:requests.models.Response):
     print("DB for " + ticker)
     # Make database connection
-    DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
     
-    conn = psycopg2.connect(database=DATABASE_CRED["database"], user = DATABASE_CRED["user"], password = DATABASE_CRED["password"], host = DATABASE_CRED["host"], port = DATABASE_CRED["port"])
+    conn = psycopg2.connect(database = config['DBNAME'], user = config['DBUSER'], password = config['DBPASSWORD'], host = config['DBHOST'], port = config['DBPORT'])
     print("Connected to " + conn.dsn)
     cur = conn.cursor()
 

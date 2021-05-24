@@ -4,6 +4,10 @@ import os
 import psycopg2
 import datetime
 import itertools
+from dotenv import dotenv_values
+
+# load secret environment variables
+config = dotenv_values(".env")
  
 def main():
     company = ["TSLA", "AAPL", "MSFT", "AMZN", "GOOG", "FB", "BRK.A", "V", "WMT", "JNJ"]
@@ -13,7 +17,7 @@ def main():
  
 def getTickerNews(ticker:str):
  
-    API_KEY = os.getenv("POLYGON_API_KEY")
+    API_KEY = config['POLYGON_API']
 
  
     # headers for Polygon API request
@@ -40,10 +44,8 @@ def getTickerNews(ticker:str):
  
 def db(data:str, page:int):
 
-    DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
-    print(DATABASE_CRED["user"])
     # Make database connection
-    conn = psycopg2.connect(database=DATABASE_CRED["database"], user = DATABASE_CRED["user"], password = DATABASE_CRED["password"], host = DATABASE_CRED["host"], port = DATABASE_CRED["port"])
+    conn = psycopg2.connect(database = config['DBNAME'], user = config['DBUSER'], password = config['DBPASSWORD'], host = config['DBHOST'], port = config['DBPORT'])
     cur = conn.cursor()
 
     # Convert JSON text into JSON object

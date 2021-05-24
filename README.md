@@ -10,6 +10,8 @@
     - DBHOST
     - DBPORT
     - TWITTER_BEARER
+    - POLYGON_API
+    - FINNHUB_API
 
 
 For example
@@ -20,6 +22,8 @@ export DBPASSWORD = "[DATABASE PASSWORD FOR USERNAME]"
 export DBHOST = "[DATABASE IP ADDRESS]"
 export DBPORT = "[DATABASE PORT NUMBER]"
 export TWITTER_BEARER = "[TWITTER BEARER TOKEN]"
+export POLYGON_API = "[POLYGON API KEY]"
+export FINNHUB_API = "[FINNHUB API KEY]"
 ```
 
 <sub><sup>Replace text within brackets []</sup></sub>
@@ -32,12 +36,14 @@ pip install python-dotenv
 ```
 - Install other packages that are important for the source code
 ```
+Beautifulsoup4
 Flask
 Matplotlib
 NLTK
 Numpy
 Pandas
 Psycopg2
+Pycurl
 Requets
 Sci-kit-learn
 Sentistength

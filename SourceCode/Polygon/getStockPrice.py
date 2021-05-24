@@ -3,6 +3,10 @@ import json
 import os
 import psycopg2
 import datetime
+from dotenv import dotenv_values
+
+# load secret environment variables
+config = dotenv_values(".env")
 
 def main():
 
@@ -17,7 +21,7 @@ def main():
 
 def getStockPrice(ticker:str):
 
-    API_KEY = os.getenv("POLYGON_API_KEY")
+    API_KEY = config['POLYGON_API']
 
     # Quartley requests
     tgtDates = [
@@ -126,9 +130,7 @@ def getStockPrice(ticker:str):
 def db(data:str, ticker:str):
 
     # Make database connection
-    DATABASE_CRED = json.loads(os.getenv("DATABASE_CREDS"))
-    
-    conn = psycopg2.connect(database=DATABASE_CRED["database"], user = DATABASE_CRED["user"], password = DATABASE_CRED["password"], host = DATABASE_CRED["host"], port = DATABASE_CRED["port"])
+    conn = psycopg2.connect(database = config['DBNAME'], user = config['DBUSER'], password = config['DBPASSWORD'], host = config['DBHOST'], port = config['DBPORT'])
     print("Connected to " + conn.dsn)
     cur = conn.cursor()
 
