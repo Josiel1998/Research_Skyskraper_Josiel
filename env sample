@@ -1,0 +1,13 @@
+export DBNAME=""
+export DBUSER=""
+export DBPASSWORD=""
+export DBHOST=""
+export DBPORT=""
+
+export TWITTER_API=""
+export TWITTER_API_SECRET=""
+export TWITTER_BEARER=""
+
+export POLYGON_API=""
+
+export FINNHUB_API=""
