@@ -2,7 +2,26 @@
 
 ## Setup and Installations
 - Create local environment variables
-    - https://pypi.org/project/python-dotenv/
+    - [Source](https://pypi.org/project/python-dotenv/)
+    - Required variables
+        - DBNAME
+        - DBUSER
+        - DBPASSWORD
+        - DBHOST
+        - DBPORT
+
+
+For example
+```
+export DBNAME = "[DATABASE NAME]"
+export DBUSER = "[DATABASE USERNAME"
+export DBPASSWORD = "[DATABASE PASSWORD FOR USERNAME]"
+export DBHOST = "[DATABASE IP ADDRESS]"
+export DBPORT = "[DATABASE PORT NUMBER]"
+```
+
+<sub><sup>Replace text within brackets []</sup></sub>
+
 ```
 pip install python-dotenv 
 ```
