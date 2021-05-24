@@ -1,14 +1,14 @@
 # Research_Skyskraper_Josiel
 
-## Setup and Installations
-- Create local environment variables
-    - [Source](https://pypi.org/project/python-dotenv/)
-    - Required variables
-        - DBNAME
-        - DBUSER
-        - DBPASSWORD
-        - DBHOST
-        - DBPORT
+## Setup and Installation
+### Create local environment variables
+- [Source](https://pypi.org/project/python-dotenv/)
+- Required variables
+    - DBNAME
+    - DBUSER
+    - DBPASSWORD
+    - DBHOST
+    - DBPORT
 
 
 For example
@@ -22,11 +22,13 @@ export DBPORT = "[DATABASE PORT NUMBER]"
 
 <sub><sup>Replace text within brackets []</sup></sub>
 
+
+### Install the following packages
+
 ```
 pip install python-dotenv 
 ```
-
-- Install the following packages
+- Install other packages that are important for the source code
 ```
 Flask
 Matplotlib
@@ -45,7 +47,7 @@ Word2Vec
 ```
 See requirements.txt for more details
 
-Source Code for the SkySkraper project is for academic research purposes only. 
+<sub><sup>Source Code for the SkySkraper project is for academic research purposes only. </sup></sub>
 
 
 
