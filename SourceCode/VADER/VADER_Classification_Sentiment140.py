@@ -9,8 +9,10 @@ def main():
 def sentiment_scores():
 
     # Get Data
-    #df = pd.read_csv(str(os.path.dirname(__file__)) + "/data/TwitterDataset.csv")
-    df = pd.read_csv('/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/SemEval_2017_Task4_TestSplit_BERT_Senti.csv')
+    df = pd.read_csv('SourceCode/Datasets/Investigation/Sentiment140TestResults.csv')
+    #url = 'https://drive.google.com/file/d/1m6M0uUhM90I1rVsRutg5P-4BuI-nEqkC/view?usp=sharing'
+    #url2='https://drive.google.com/uc?id=' + url.split('/')[-2]
+    #df = pd.read_csv(url2, names=['Sentiment', 'TweetID', 'Date', 'Query', 'User', 'Tweet'])
     print(df.head())
 
     #capture VADER Data
@@ -58,9 +60,10 @@ def sentiment_scores():
 
     df["VADER_Score"] = VADERscore
     df["VADER_Compound"] = VADERcompound
-    df["VADER_Classification"] = VADERclassification
+    df["VADER_Sentiment"] = VADERclassification
     print(df.head())
-    df.to_csv ("//Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/SemEval_2017_Task4_TestSplit_BERT_Senti_VADER.csv", index = False, header=True)
+    print(df.info())
+    df.to_csv ("SourceCode/Datasets/Investigation/Sentiment140TestResults.csv", index = False, header=True)
 
 
 if __name__ == '__main__':
