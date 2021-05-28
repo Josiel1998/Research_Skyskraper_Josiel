@@ -15,7 +15,7 @@ def main():
     resN = []
     count = 0
 
-    data = pd.read_csv("SourceCode/Datasets/StanfordSentimentTreebank/SST1_PhrasesAndSentiments.csv") 
+    data = pd.read_csv("/Users/josieldelgadillo/GitHub_M1/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/StanfordSentimentTreebank/SST1_PhrasesAndSentiments.csv") 
     for tweet in data.values:
         print(count)
         print(tweet[1])
@@ -28,7 +28,7 @@ def main():
     data["SentiStrengthScore"] = resN
     print(data.head())
     print(data.info())
-    data.to_csv("SourceCode/Datasets/StanfordSentimentTreebank/SST1_PhrasesAndSentiments.csv")
+    data.to_csv("SourceCode/Datasets/StanfordSentimentTreebank/SST1_PhrasesAndSentiments2.csv")
 
 def RateSentiment(sentiString):
 

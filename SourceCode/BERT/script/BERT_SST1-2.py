@@ -40,7 +40,7 @@ def file():
     df["BERTSentiment2"] = sentiment
     df["BERTDetails2"] = sentiment_details
 
-    df.to_csv ("/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/StanfordSentimentTreebank/SST1_PhrasesAndSentiments.csv", index = False, header=True)
+    df.to_csv ("/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/StanfordSentimentTreebank/SST1_PhrasesAndSentiments1.csv", index = False, header=True)
 
 def db():
     try:
@@ -82,7 +82,7 @@ model = SentimentClassifier(len(class_names))
 
 
 def model_b(text:str):
-    model.load_state_dict(torch.load('SourceCode/BERT/model/SE2017T4_BERT_base_cased_model_5Fold_92_TRI2.bin', map_location=torch.device("cpu")))
+    model.load_state_dict(torch.load('SourceCode/BERT/model/SE2017T4_BERT_base_cased_model.bin', map_location=torch.device("cpu")))
     return predict(text)
 
 def predict(tweet):
