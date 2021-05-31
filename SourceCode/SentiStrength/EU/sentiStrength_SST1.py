@@ -28,7 +28,7 @@ def main():
     data["SentiStrengthScore"] = resN
     print(data.head())
     print(data.info())
-    data.to_csv("SourceCode/Datasets/StanfordSentimentTreebank/SST1_PhrasesAndSentiments2.csv")
+    data.to_csv("/Users/josieldelgadillo/GitHub_M1/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/StanfordSentimentTreebank/SST1_PhrasesAndSentiments2.csv")
 
 def RateSentiment(sentiString):
 
@@ -49,8 +49,8 @@ def RateSentiment(sentiString):
     #replace the tab with a space between the positive and negative ratings. e.g. 1    -5 -> 1 -5
     stdout_text = stdout_text.rstrip().replace("\t"," ")
     classification = stdout_text.split()
-    positive = int(classification[0])
-    negative = int(classification[1])
+    #positive = int(classification[0])
+    #negative = int(classification[1])
     overall = int(classification[2])
 
     # Switch/Casing classification definition
@@ -98,8 +98,8 @@ def RateSentimentTri(sentiString):
     #replace the tab with a space between the positive and negative ratings. e.g. 1    -5 -> 1 -5
     stdout_text = stdout_text.rstrip().replace("\t"," ")
     classification = stdout_text.split()
-    positive = int(classification[0])
-    negative = int(classification[1])
+    #positive = int(classification[0])
+    #negative = int(classification[1])
     overall = int(classification[2])
 
     # Switch/Casing classification definition

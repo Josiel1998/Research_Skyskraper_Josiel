@@ -34,13 +34,14 @@ def file():
 
     for index, row in df.iterrows():
       print(index)
+      print(row.Phrase)
       sentiment.append(predict(row.Phrase)) 
       sentiment_details.append(predict_d(row.Phrase))
 
     df["BERTSentiment2"] = sentiment
     df["BERTDetails2"] = sentiment_details
 
-    df.to_csv ("/Users/josieldelgadillo/Documents/GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/StanfordSentimentTreebank/SST1_PhrasesAndSentiments1.csv", index = False, header=True)
+    df.to_csv("SourceCode/Datasets/StanfordSentimentTreebank/SST1_PhrasesAndSentiments3.csv", index = False, header=True)
 
 def db():
     try:
