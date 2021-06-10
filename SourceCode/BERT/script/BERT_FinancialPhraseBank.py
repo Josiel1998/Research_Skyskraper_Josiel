@@ -25,7 +25,7 @@ def main():
 def file():
     sentiment = []
     sentiment_details = []
-    df = pd.read_csv("GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/Investigation/AllSentences_FSB.csv")
+    df = pd.read_csv("SourceCode/Datasets/Investigation/AllSentences_FSB.csv")
     print(df.head())
     print(df.info())
 
@@ -35,10 +35,10 @@ def file():
       sentiment.append(predict(row.Text)) 
       sentiment_details.append(predict_d(row.Text))
 
-    df["BERTSentiment_8020"] = sentiment
-    df["BERTDetails_8020"] = sentiment_details
+    df["BERTSentiment_KFold_Se2017T5"] = sentiment
+    df["BERTDetails_KFold_Se2017T5"] = sentiment_details
 
-    df.to_csv("GitHub/Research_Skyskraper_Josiel/SourceCode/Datasets/Investigation/AllSentences_FSB.csv", index = False, header=True)
+    df.to_csv("SourceCode/Datasets/Investigation/AllSentences_FSB.csv", index = False, header=True)
 
 def db():
     try:
@@ -80,7 +80,7 @@ model = SentimentClassifier(len(class_names))
 
 
 def model_b(text:str):
-    model.load_state_dict(torch.load('GitHub/Research_Skyskraper_Josiel/SourceCode/BERT/model/SE2017T4_BERT_base_cased_model.bin', map_location=torch.device("cpu")))
+    model.load_state_dict(torch.load('SourceCode/BERT/model/SE2017T5_BERT_base_cased_model_Kfold_TRI_88acc.bin', map_location=torch.device("cpu")))
     return predict(text)
 
 def predict(tweet):
